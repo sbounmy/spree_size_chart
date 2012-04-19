@@ -1,0 +1,23 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<h1><%= t(:edit_size_chart) %></h1>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @size_chart } %>
+<% size_type_ids = @size_chart.size_type_ids  %>
+
+<%= form_for @size_chart, :url => admin_product_size_chart_path(@product), :method => :put do |f| %>
+  <%= f.label :option_type_id, t(:option_type_id) %>
+  <%= f.select :option_type_id, Spree::OptionType.select("id, name").map {|opt| [opt.name, opt.id] }, { :include_blank => true } %>
+
+  <% Spree::SizeType.all.each do |type| %>
+    <label><%= type.name %>
+      <%= check_box_tag "size_chart[size_type_ids][]", type.id, size_type_ids.include?(type.id) %>
+    </label>
+  <% end %>
+  <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+<% end %>
+
+<%= form_for @size_chart, :url => admin_product_size_chart_path(@product), :method => :put do |form| %>
+  <%= render :partial => 'form', :locals => { :form => form } %>
+  <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+<% end %>

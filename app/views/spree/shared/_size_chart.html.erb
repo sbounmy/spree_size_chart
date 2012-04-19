@@ -1,0 +1,31 @@
+<% @size_chart = @product.size_chart %>
+<% if @size_chart %>
+  <div id="product-size-chart" data-hook="product_size_chart">
+    <table>
+    <% @i = 0 %>
+    <% @size_type_count = @size_chart.size_types.count %>
+    <thead>
+      <tr>
+        <th>OptionValue</th>
+        <% @size_chart.size_types.each do |type| %>
+        <th><%= type.name %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @size_chart.find_or_initialize_size_values.each do |size_value| %>
+        <% if @i == 0 %>
+          <%= "<tr>".html_safe  %>
+          <th><%= @size_chart.option_values.find(size_value.option_value_id).name %></th>
+        <% end %>
+        <td>
+          <%= number_with_precision size_value.value, :strip_insignificant_zeros => true %>
+        </td>
+        <%= "</tr>".html_safe if @i == @size_type_count - 1 %>
+        <% @i += 1 %>
+        <% @i = 0 if @i == @size_type_count %>
+      <% end %>
+    </tbody>
+    </table>
+  </div>
+<% end %>

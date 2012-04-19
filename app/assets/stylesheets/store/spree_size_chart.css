@@ -1,0 +1,12 @@
+/*
+ *= require store/spree_core
+*/
+
+div#product-size-chart table tbody th {
+  text-align: left;
+  padding-left: 10px;
+}
+
+div#product-size-chart table tbody td {
+  text-align: center;
+}

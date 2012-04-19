@@ -1,0 +1,30 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <%= button_link_to t("new_size_type"), new_object_url, :icon => 'add'  %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= t("size_types") %></h1>
+
+<table class="index">
+  <thead data-hook="admin_size_types_index_headers">
+    <th><%= t("size_type_name") %></th>
+    <th data-hook="admin_social_methods_index_header_actions">&nbsp;</th>
+  </thead>
+  <tbody>
+    <% @size_types.each do |size|%>
+      <tr id="<%= dom_id size %>" data-hook="admin_trackers_index_rows">
+        <td><%= size.name %></td>
+        <td>
+          <%= link_to_edit size %> &nbsp;
+          <%= link_to_delete size %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

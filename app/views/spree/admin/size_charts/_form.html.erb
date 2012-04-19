@@ -1,0 +1,28 @@
+<%= form.field_container :name do %>
+  <table>
+    <% unless form.object.new_record? %>
+      <% @i = 0 %>
+      <% @size_type_count = form.object.size_types.count %>
+      <tr>
+        <th>OptionValue</th>
+        <% form.object.size_types.each do |type| %>
+          <th><%= type.name %></th>
+        <% end %>
+      </tr>
+        <%= form.fields_for :size_values, form.object.find_or_initialize_size_values do |value_form| %>
+        <% if @i == 0 %>
+          <%= "<tr>".html_safe  %>
+          <th><%= form.object.option_values.find(value_form.object.option_value_id).name %></th>
+        <% end %>
+        <td>
+          <%= value_form.hidden_field :size_type_id %>
+          <%= value_form.hidden_field :option_value_id %>
+          <%= value_form.text_field :value %>
+        </td>
+        <%= "</tr>".html_safe if @i == @size_type_count - 1 %>
+        <% @i += 1 %>
+        <% @i = 0 if @i == @size_type_count %>
+        <% end %>
+    <% end %>
+  </table>
+<% end %>
