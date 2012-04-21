@@ -1,5 +1,7 @@
 module Spree
   class SizeChart < ActiveRecord::Base
+    UNITS = ['cm', 'inch']
+
     belongs_to  :option_type, :class_name => "Spree::OptionType"
     belongs_to  :product
     has_many    :option_values, :through => :option_type
@@ -7,7 +9,7 @@ module Spree
     has_many    :size_values, :class_name => "Spree::SizeValue"
 
     accepts_nested_attributes_for :size_values, :reject_if => proc { |attributes| attributes['value'].blank? }
-    attr_accessible :size_values_attributes, :size_type_ids
+    attr_accessible :size_values_attributes, :size_type_ids, :unit
 
     def find_or_initialize_size_values
       @size_values = []

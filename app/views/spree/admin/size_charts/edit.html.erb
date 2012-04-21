@@ -14,6 +14,9 @@
       <%= check_box_tag "size_chart[size_type_ids][]", type.id, size_type_ids.include?(type.id) %>
     </label>
   <% end %>
+
+  <%= f.select :unit, Spree::SizeChart::UNITS, :include_blank => true %>
+
   <%= render :partial => 'spree/admin/shared/new_resource_links' %>
 <% end %>
 

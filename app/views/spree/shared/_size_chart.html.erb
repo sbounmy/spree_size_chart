@@ -6,9 +6,9 @@
     <% @size_type_count = @size_chart.size_types.count %>
     <thead>
       <tr>
-        <th>OptionValue</th>
+        <th><%= @size_chart.option_type.presentation %></th>
         <% @size_chart.size_types.each do |type| %>
-        <th><%= type.name %></th>
+        <th><%= type.name_with_unit(@size_chart.unit) %></th>
         <% end %>
       </tr>
     </thead>
