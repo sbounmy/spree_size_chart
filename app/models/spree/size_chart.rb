@@ -9,7 +9,7 @@ module Spree
     has_many    :size_values, :class_name => "Spree::SizeValue"
 
     accepts_nested_attributes_for :size_values, :reject_if => proc { |attributes| attributes['value'].blank? }
-    attr_accessible :size_values_attributes, :size_type_ids, :unit
+    attr_accessible :size_values_attributes, :size_type_ids, :unit, :option_type_id
 
     def find_or_initialize_size_values
       @size_values = []
