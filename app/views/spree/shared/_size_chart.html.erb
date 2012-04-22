@@ -1,5 +1,5 @@
 <% @size_chart = @product.size_chart %>
-<% if @size_chart %>
+<% if @size_chart and !@size_chart.size_values.empty? %>
   <div id="product-size-chart" data-hook="product_size_chart">
     <table>
     <% @i = 0 %>
