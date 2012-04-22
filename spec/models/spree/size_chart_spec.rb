@@ -64,7 +64,7 @@ describe Spree::SizeChart do
     end
 
     it "should destroy if value is blank" do
-      @size_chart.update_attributes :size_values_attributes => [{:id => @size_value1.id, :value => ""}, {:id => @size_value2.id, :value => "3"}]
+      @size_chart.update_attributes :size_values_attributes => {"0"=>{"id" => @size_value1.id, "size_type_id"=> @size_type1, "option_value_id"=> @size_type1.id, "value"=>"" }, "1"=>{"id" => @size_value2.id, "size_type_id"=> @size_type2.id, "option_value_id"=> @option_value1.id, "value"=>"123" }}
       @size_chart.size_values.count.should == 2
       @size_chart.size_values.should =~ [@size_value2, @size_value3]
     end

@@ -12,12 +12,10 @@ module Spree
     attr_accessible :size_values_attributes, :size_type_ids, :unit, :option_type_id
 
     def size_values_attributes_with_sanity_check=(attributes)
-      attributes.map! do |attrs|
+      attributes.each_value do |attrs|
         attrs.symbolize_keys!
         if attrs[:id] and attrs[:value].blank?
-          attrs.merge(:_destroy => true)
-        else
-          attrs
+          attrs.merge!(:_destroy => true)
         end
       end
       self.size_values_attributes_without_sanity_check = attributes
