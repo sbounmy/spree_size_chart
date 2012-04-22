@@ -42,4 +42,17 @@ describe Spree::SizeChart do
       @size_chart.hash_size_values.should == {@option_value1.id => {@size_type1.id => @size_value1, @size_type2.id => @size_value2}, @option_value3.id => {@size_type2.id => @size_value3}}
     end
   end
+
+  describe "#find_size_values" do
+    before do
+      @variant = Factory(:variant, :product => @product)
+      @variant.option_values << @option_value3
+      @size_value3 = Factory(:size_value, :option_value => @option_value3, :size_chart => @size_chart, :size_type => @size_type2)
+    end
+
+    it "returns only if product variants has option_value" do
+      @size_chart.find_size_values.count.should == 1
+      @size_chart.find_size_values.first.should == @size_value3
+    end
+  end
 end

@@ -11,6 +11,20 @@ module Spree
     accepts_nested_attributes_for :size_values, :reject_if => proc { |attributes| attributes['value'].blank? }
     attr_accessible :size_values_attributes, :size_type_ids, :unit, :option_type_id
 
+    def find_size_values
+      @size_values = []
+      option_value_ids.each do |opt_value_id|
+        size_type_ids.each do |size_type_id|
+          if _size_value = find_or_initialize_size_value(opt_value_id, size_type_id) and !_size_value.new_record?
+            @size_values << _size_value
+          end
+        end
+      end
+
+      @size_values
+    end
+
+
     def find_or_initialize_size_values
       @size_values = []
       option_value_ids.each do |opt_value_id|

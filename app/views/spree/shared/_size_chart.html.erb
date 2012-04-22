@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @size_chart.find_or_initialize_size_values.each do |size_value| %>
+      <% @size_chart.find_size_values.each do |size_value| %>
         <% if @i == 0 %>
           <%= "<tr>".html_safe  %>
           <th><%= @size_chart.option_values.find(size_value.option_value_id).name %></th>

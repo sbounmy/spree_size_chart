@@ -4,7 +4,7 @@
       <% @i = 0 %>
       <% @size_type_count = form.object.size_types.count %>
       <tr>
-        <th>OptionValue</th>
+        <th><%= form.object.option_type.presentation %></th>
         <% form.object.size_types.each do |type| %>
           <th><%= type.name %></th>
         <% end %>
