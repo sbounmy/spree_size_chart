@@ -13,7 +13,7 @@ module Spree
 
     def size_values_attributes_with_sanity_check=(attributes)
       attributes.each_value do |attrs|
-        if attrs['id'] and attrs['value'].blank?
+        if attrs['value'].blank?
           attrs.merge!('_destroy' => true)
         end
       end
