@@ -8,8 +8,22 @@ module Spree
     has_and_belongs_to_many :size_types, :class_name => "Spree::SizeType", :join_table => "spree_size_charts_size_types"
     has_many    :size_values, :class_name => "Spree::SizeValue"
 
-    accepts_nested_attributes_for :size_values, :reject_if => proc { |attributes| attributes['value'].blank? }
+    accepts_nested_attributes_for :size_values, :allow_destroy => true
     attr_accessible :size_values_attributes, :size_type_ids, :unit, :option_type_id
+
+    def size_values_attributes_with_sanity_check=(attributes)
+      attributes.map! do |attrs|
+        attrs.symbolize_keys!
+        if attrs[:id] and attrs[:value].blank?
+          attrs.merge(:_destroy => true)
+        else
+          attrs
+        end
+      end
+      self.size_values_attributes_without_sanity_check = attributes
+    end
+
+    alias_method_chain :size_values_attributes=, :sanity_check
 
     def find_size_values
       @size_values = []
