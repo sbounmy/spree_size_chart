@@ -19,7 +19,7 @@
           <th><%= @size_chart.option_values.find(size_value.option_value_id).name %></th>
         <% end %>
         <td>
-          <%= number_with_precision size_value.value || 0, :strip_insignificant_zeros => true %>
+          <%= number_with_precision(size_value.value || 0, :strip_insignificant_zeros => true) %>
         </td>
         <%= "</tr>".html_safe if @i == @size_type_count - 1 %>
         <% @i += 1 %>
