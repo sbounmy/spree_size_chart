@@ -65,7 +65,7 @@ module Spree
     end
 
     def option_type_with_unit
-      "#{option_type.presentation} (#{unit})"
+      "#{option_type.try(:presentation)} (#{unit})"
     end
   end
 

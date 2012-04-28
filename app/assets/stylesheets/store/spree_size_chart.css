@@ -12,5 +12,5 @@ div#product-size-chart table tbody td {
 }
 
 div#product-size-chart table tbody td, div#product-size-chart table tbody th {
-  vertical-align: center;
+  vertical-align: middle;
 }
