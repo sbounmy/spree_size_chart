@@ -63,6 +63,10 @@ module Spree
       end
       @hsize_values
     end
+
+    def option_type_with_unit
+      "#{option_type.presentation} (#{unit})"
+    end
   end
 
 end

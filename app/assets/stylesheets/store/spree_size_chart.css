@@ -10,3 +10,7 @@ div#product-size-chart table tbody th {
 div#product-size-chart table tbody td {
   text-align: center;
 }
+
+div#product-size-chart table tbody td, div#product-size-chart table tbody th {
+  vertical-align: center;
+}

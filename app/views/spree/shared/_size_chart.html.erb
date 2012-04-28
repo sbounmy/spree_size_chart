@@ -6,9 +6,9 @@
     <% @size_type_count = @size_chart.size_types.count %>
     <thead>
       <tr>
-        <th><%= @size_chart.option_type.presentation %></th>
+        <th><%= @size_chart.option_type_with_unit -%></th>
         <% @size_chart.size_types.each do |type| %>
-        <th><%= type.name_with_unit(@size_chart.unit) %></th>
+        <th><%= type.name -%></th>
         <% end %>
       </tr>
     </thead>
@@ -16,7 +16,7 @@
       <% @size_chart.find_size_values.each do |size_value| %>
         <% if @i == 0 %>
           <%= "<tr>".html_safe  %>
-          <th><%= @size_chart.option_values.find(size_value.option_value_id).name %></th>
+          <th><%= @size_chart.option_values.find(size_value.option_value_id).name -%></th>
         <% end %>
         <td>
           <%= number_with_precision(size_value.value, :strip_insignificant_zeros => true, :locale => :en) %>
