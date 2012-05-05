@@ -13,6 +13,7 @@ Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each {|f| require f }
 require 'spree/core/testing_support/factories'
 
 require 'factories'
+require 'ffaker'
 
 RSpec.configure do |config|
   # == Mock Framework
