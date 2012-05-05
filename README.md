@@ -36,7 +36,7 @@ rails g spree_size_chart:install
 Customization
 -------------
 
-The SizeChart markup should let you customize the way you want your SizeChart by using Deface or overriding views/spree/shared/_size_chart_.html.erb in your spree app.
+The SizeChart markup should let you customize the way you want your SizeChart by using Deface or overriding views/spree/shared/_size_chart.html.erb in your spree app.
 
 If you want to display yourself the size chart, just disable the deface :
 
