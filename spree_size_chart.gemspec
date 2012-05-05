@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_size_chart'
-  s.version     = '1.0.0'
+  s.version     =  SpreeSizeChart::VERSION
   s.summary     = 'SpreeSizeChart is a spree extension helping your store to provide pertinent product information'
   s.description = 'SpreeSizeChart is a spree extension helping your store to provide pertinent product information'
   s.required_ruby_version = '>= 1.8.7'
