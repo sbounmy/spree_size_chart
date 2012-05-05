@@ -18,6 +18,7 @@ Installation
 To install SpreeSizeChart, just add the following to your Gemfile:
 
 ```ruby
+# for spree 1.0.X
 gem 'spree_size_chart', '~> 1.0.0'
 ```
 
