@@ -30,7 +30,7 @@ Now, bundle up and run the generator:
 
 ```ruby
 bundle
-rails g spree_minicart:install
+rails g spree_size_chart:install
 ```
 
 Customization
