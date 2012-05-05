@@ -21,7 +21,7 @@ To install SpreeSizeChart, just add the following to your Gemfile:
 # for spree 1.0.X
 gem 'spree_size_chart', '~> 1.0.0'
 
-# for spree 1.0.X
+# for spree 1.1.X
 gem 'spree_size_chart', '~> 1.1.0'
 
 ```
