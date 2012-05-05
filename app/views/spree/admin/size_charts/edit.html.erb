@@ -19,10 +19,6 @@
 
   <%= f.select :unit, Spree::SizeChart::UNITS, :include_blank => true %>
 
-  <%= render :partial => 'spree/admin/shared/new_resource_links' %>
-<% end %>
-
-<%= form_for @size_chart, :url => admin_product_size_chart_path(@product), :method => :put do |form| %>
-  <%= render :partial => 'form', :locals => { :form => form } %>
+  <%= render :partial => 'form', :locals => { :form => f } %>
   <%= render :partial => 'spree/admin/shared/new_resource_links' %>
 <% end %>

@@ -11,19 +11,59 @@ feature "spree size chart" do
     @product = Factory(:product)
   end
 
+  def fill_size_chart
+    fill_in "size_chart_size_values_attributes_0_value", :with => 50
+    fill_in "size_chart_size_values_attributes_1_value", :with => 70
+
+    fill_in "size_chart_size_values_attributes_2_value", :with => 54
+    fill_in "size_chart_size_values_attributes_3_value", :with => 76
+
+    fill_in "size_chart_size_values_attributes_4_value", :with => 56
+    fill_in "size_chart_size_values_attributes_5_value", :with => 78
+  end
+
   scenario "create size chart" do
     visit spree.edit_admin_product_path(@product)
     click_link "Size Chart"
     select "Size", :from => "Option Type"
+    check "Chest"
+    check "Sleeves"
     click_button "Create"
-    save_and_open_page
-    fill_in "size_chart_size_values_attributes_0_0_value", :with => 50
-    fill_in "size_chart_size_values_attributes_1_1_value", :with => 70
-    fill_in "size_chart_size_values_attributes_2_2_value", :with => 52
-    fill_in "size_chart_size_values_attributes_3_3_value", :with => 74
-    fill_in "size_chart_size_values_attributes_4_4_value", :with => 54
-    fill_in "size_chart_size_values_attributes_5_5_value", :with => 76
+
+    fill_size_chart
     click_button "Create"
-    save_and_open_page
+
+    visit spree.product_path(@product)
+    page.should have_content "50"
+    page.should have_content "70"
   end
+
+  scenario "update size chart" do
+    visit spree.edit_admin_product_path(@product)
+    click_link "Size Chart"
+    select "Size", :from => "Option Type"
+    check "Chest"
+    check "Sleeves"
+    click_button "Create"
+
+    fill_size_chart
+    click_button "Create"
+
+    fill_in "size_chart_size_values_attributes_0_value", :with => 52
+    uncheck "Sleeves"
+
+    click_button "Create"
+
+    visit spree.product_path(@product)
+    # should have chest size
+    page.should have_content "52"
+    page.should have_content "54"
+    page.should have_content "56"
+
+    # should not have sleeves size
+    page.should_not have_content "70"
+    page.should_not have_content "76"
+    page.should_not have_content "78"
+  end
+
 end
