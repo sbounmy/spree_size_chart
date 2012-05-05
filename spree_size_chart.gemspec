@@ -1,4 +1,7 @@
 # encoding: UTF-8
+$:.push File.expand_path("../lib", __FILE__)
+require "spree_size_chart/version"
+
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_size_chart'
