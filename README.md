@@ -1,4 +1,4 @@
-SpreeSizeChart
+SpreeSizeChart [![Build Status](https://secure.travis-ci.org/sbounmy/spree_size_chart.png?branch=master)](http://travis-ci.org/sbounmy/spree_size_chart)
 ==============
 
 SpreeSizeChart feature extracted from [http://www.hallyustyle.com](http://www.hallyustyle.com).
@@ -20,19 +20,23 @@ To install SpreeSizeChart, just add the following to your Gemfile:
 ```ruby
 # for spree 1.0.X
 gem 'spree_size_chart', '~> 1.0.0'
+
+# for spree 1.1.X
+gem 'spree_size_chart', '~> 1.1.0'
+
 ```
 
 Now, bundle up and run the generator:
 
 ```ruby
 bundle
-rails g spree_minicart:install
+rails g spree_size_chart:install
 ```
 
 Customization
 -------------
 
-The SizeChart markup should let you customize the way you want your SizeChart by using Deface or overriding views/spree/shared/_size_chart_.html.erb in your spree app.
+The SizeChart markup should let you customize the way you want your SizeChart by using Deface or overriding views/spree/shared/_size_chart.html.erb in your spree app.
 
 If you want to display yourself the size chart, just disable the deface :
 
@@ -52,12 +56,12 @@ Todo
 
 - Better html markup and HTML test for customization
 - Add translation to size type.
-- Compatibilty Spree 1.1.X
 
 Compatibility
 ------------
 
 Tested under Spree 1.0.4
+Need feedback on Spree 1.1.X
 
 
 Testing
