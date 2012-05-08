@@ -1,4 +1,4 @@
-SpreeSizeChart
+SpreeSizeChart [![Build Status](https://secure.travis-ci.org/sbounmy/spree_size_chart.png?branch=master)](http://travis-ci.org/sbounmy/spree_size_chart)
 ==============
 
 SpreeSizeChart feature extracted from [http://www.hallyustyle.com](http://www.hallyustyle.com).
