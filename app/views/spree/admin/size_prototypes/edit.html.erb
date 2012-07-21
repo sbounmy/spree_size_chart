@@ -1,0 +1,10 @@
+<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+
+<h1><%= t(:new_size_prototype) %></h1>
+
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @size_prototype } %>
+
+<%= form_for [:admin, @size_prototype] do |prototype_form| %>
+  <%= render :partial => 'form', :locals => { :form => prototype_form } %>
+  <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+<% end %>

@@ -4,12 +4,13 @@ module Spree
 
     belongs_to  :option_type, :class_name => "Spree::OptionType"
     belongs_to  :product
+    belongs_to  :size_prototype
     has_many    :option_values, :through => :option_type
     has_and_belongs_to_many :size_types, :class_name => "Spree::SizeType", :join_table => "spree_size_charts_size_types"
     has_many    :size_values, :class_name => "Spree::SizeValue"
 
     accepts_nested_attributes_for :size_values, :allow_destroy => true
-    attr_accessible :size_values_attributes, :size_type_ids, :unit, :option_type_id
+    attr_accessible :size_values_attributes, :size_type_ids, :unit, :option_type_id, :size_prototype_id
 
     def size_values_attributes_with_sanity_check=(attributes)
       attributes.each_value do |attrs|

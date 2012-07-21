@@ -1,0 +1,14 @@
+<% image = form.object.image || form.object.build_image %>
+<%= form.field_container :name do %>
+  <%= form.label :name, t(:size_prototype_name) %>
+  <%= form.text_field :name %>
+<% end %>
+
+<%= form.fields_for :image, image do |image_form| %>
+  <%= image_form.label :attachment, t(:size_prototype_image) %>
+  <%= image_form.file_field :attachment %>
+<% end %>
+
+<% unless image.new_record? %>
+  <%= image_tag image.attachment.url(:small) %>
+<% end %>

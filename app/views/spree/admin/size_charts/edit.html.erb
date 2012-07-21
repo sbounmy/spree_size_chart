@@ -11,6 +11,11 @@
   <%= f.label :option_type_id, t(:option_type_id) %>
   <%= f.select :option_type_id, Spree::OptionType.select("id, name").map {|opt| [opt.name, opt.id] }, { :include_blank => true } %>
 
+  <%= f.field_container :size_prototype_id do %>
+    <%= f.label :size_prototype_id, t(:size_prototype_id) %>
+    <%= f.collection_select :size_prototype_id, Spree::SizePrototype.all, :id, :name, :include_blank => true %>
+  <% end %>
+
   <% Spree::SizeType.all.each do |type| %>
     <label><%= type.name %>
       <%= check_box_tag "size_chart[size_type_ids][]", type.id, size_type_ids.include?(type.id) %>

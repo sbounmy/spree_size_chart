@@ -29,4 +29,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'debugger'
   s.add_development_dependency 'awesome_print'
+  s.add_development_dependency 'sass-rails'
 end

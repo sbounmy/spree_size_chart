@@ -28,4 +28,8 @@
     </tbody>
     </table>
   </div>
+
+  <% if @size_chart.size_prototype and @size_chart.size_prototype.image %>
+    <%= image_tag @size_chart.size_prototype.image.attachment.url %>
+  <% end %>
 <% end %>
