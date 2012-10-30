@@ -1,14 +1,16 @@
 require 'spec_helper'
 
 feature "spree size chart" do
+  stub_authorization!
+
   before do
-    @option_type = Factory(:option_type, :name => "Size")
-    @option_value1 = Factory(:option_value, :name => "M", :option_type => @option_type)
-    @option_value2 = Factory(:option_value, :name => "L", :option_type => @option_type)
-    @option_value3 = Factory(:option_value, :name => "XL", :option_type => @option_type)
-    @size_type1 = Factory(:size_type, :name => "Chest")
-    @size_type2 = Factory(:size_type, :name => "Sleeves")
-    @product = Factory(:product)
+    @option_type = FactoryGirl.create(:option_type, :name => "Size")
+    @option_value1 = FactoryGirl.create(:option_value, :name => "M", :option_type => @option_type)
+    @option_value2 = FactoryGirl.create(:option_value, :name => "L", :option_type => @option_type)
+    @option_value3 = FactoryGirl.create(:option_value, :name => "XL", :option_type => @option_type)
+    @size_type1 = FactoryGirl.create(:size_type, :name => "Chest")
+    @size_type2 = FactoryGirl.create(:size_type, :name => "Sleeves")
+    @product = FactoryGirl.create(:product)
   end
 
   def fill_size_chart
