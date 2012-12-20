@@ -3,5 +3,3 @@ before_script:
 script: "DISPLAY=:99.0 bundle exec rspec spec"
 rvm:
   - 1.9.3
-notifications:
-  irc: "irc.freenode.org#spree"
