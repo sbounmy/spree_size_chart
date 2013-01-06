@@ -16,13 +16,20 @@
     <%= f.collection_select :size_prototype_id, Spree::SizePrototype.all, :id, :name, :include_blank => true %>
   <% end %>
 
-  <% Spree::SizeType.all.each do |type| %>
-    <label><%= type.name %>
-      <%= check_box_tag "size_chart[size_type_ids][]", type.id, size_type_ids.include?(type.id) %>
-    </label>
+  <%= f.field_container :unit do %>
+    <%= f.label :unit %>
+    <%= f.select :unit, Spree::SizeChart::UNITS, :include_blank => true %>
   <% end %>
 
-  <%= f.select :unit, Spree::SizeChart::UNITS, :include_blank => true %>
+  <%= f.field_container :size_types do %>
+    <% Spree::SizeType.all.each do |type| %>
+      <div class="columns two alpha">
+        <%= label_tag "size_chart_size_type_ids_#{type.id}", type.name %>
+        <%= check_box_tag "size_chart[size_type_ids][]", type.id, size_type_ids.include?(type.id), :id => "size_chart_size_type_ids_#{type.id}" %>
+      </div>
+    <% end %>
+  <% end %>
+
 
   <%= render :partial => 'form', :locals => { :form => f } %>
   <%= render :partial => 'spree/admin/shared/new_resource_links' %>
