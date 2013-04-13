@@ -29,7 +29,7 @@
     </table>
   </div>
 
-  <% if @size_chart.size_prototype and @size_chart.size_prototype.image %>
-    <%= image_tag @size_chart.size_prototype.image.attachment.url %>
+  <% if @size_chart.prototype and @size_chart.prototype.size_chart_image %>
+    <%= image_tag @size_chart.prototype.size_chart_image.attachment.url %>
   <% end %>
 <% end %>

@@ -1,0 +1,18 @@
+<!-- insert_bottom "[data-hook='admin_prototype_form_fields']" -->
+
+<% image = f.object.size_chart_image || f.object.build_size_chart_image %>
+
+<div class="six columns omega">
+
+  <%= f.field_container :size_chart_image do %>
+    <%= f.fields_for :size_chart_image, image do |image_form| %>
+      <%= image_form.label :attachment, t(:size_chart_image) %>
+      <%= image_form.file_field :attachment %>
+    <% end %>
+  <% end %>
+
+  <% unless image.new_record? %>
+    <%= image_tag image.attachment.url(:small) %>
+  <% end %>
+
+</div>

@@ -5,6 +5,5 @@ Spree::Core::Engine.routes.append do
     end
 
     resources :size_types
-    resources :size_prototypes
   end
 end

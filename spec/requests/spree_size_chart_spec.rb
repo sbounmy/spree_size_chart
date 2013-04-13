@@ -69,7 +69,7 @@ feature "spree size chart" do
   end
 
   scenario "chart can have a prototype" do
-    visit spree.new_admin_size_prototype_path
+    visit spree.new_admin_prototype_path
     fill_in "Name", :with => "TSHIRT"
     click_button "Create"
 
@@ -78,7 +78,26 @@ feature "spree size chart" do
     select "Size", :from => "Option Type"
     check "Chest"
     check "Sleeves"
-    select "TSHIRT", :from => "Size Prototype Id"
+    select "TSHIRT", :from => "Prototype"
+    click_button "Create"
+
+    page.should have_content "Size Chart successfully updated"
+  end
+
+  scenario "chart can have a prototype with size_types", :js => true do
+    pending
+    visit spree.new_admin_prototype_path
+    fill_in "Name", :with => "Sleeveless Tshirt"
+    check 'Chest'
+    click_button "Create"
+
+    visit spree.edit_admin_product_path(@product)
+    click_link "Size Chart"
+    select "Size", :from => "Option Type"
+    select "Sleeveless Tshirt", :from => "Prototype"
+    page.should have_checked_field("Chest")
+    page.should have_not_checked_field("Chest")
+
     click_button "Create"
 
     page.should have_content "Size Chart successfully updated"

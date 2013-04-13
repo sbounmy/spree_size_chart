@@ -11,9 +11,9 @@
   <%= f.label :option_type_id, t(:option_type_id) %>
   <%= f.select :option_type_id, Spree::OptionType.select("id, name").map {|opt| [opt.name, opt.id] }, { :include_blank => true } %>
 
-  <%= f.field_container :size_prototype_id do %>
-    <%= f.label :size_prototype_id, t(:size_prototype_id) %>
-    <%= f.collection_select :size_prototype_id, Spree::SizePrototype.all, :id, :name, :include_blank => true %>
+  <%= f.field_container :prototype_id do %>
+    <%= f.label :prototype_id, t(:prototype) %>
+    <%= f.collection_select :prototype_id, Spree::Prototype.all, :id, :name, :include_blank => true %>
   <% end %>
 
   <%= f.field_container :unit do %>
