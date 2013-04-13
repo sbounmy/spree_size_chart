@@ -2,7 +2,7 @@
 
 <% image = f.object.size_chart_image || f.object.build_size_chart_image %>
 
-<div class="six columns omega">
+<div class="four columns alpha">
 
   <%= f.field_container :size_chart_image do %>
     <%= f.fields_for :size_chart_image, image do |image_form| %>
@@ -15,4 +15,11 @@
     <%= image_tag image.attachment.url(:small) %>
   <% end %>
 
+</div>
+
+<div class="twelve columns omega">
+  <%= f.field_container :size_type_ids do %>
+    <%= f.label :size_type_ids, t(:size_types) %>
+    <%= f.select :size_type_ids, Spree::SizeType.all.map { |st| [st.name, st.id] }, {}, { :multiple => true, :class => "select2 fullwidth" } %>
+  <% end %>
 </div>

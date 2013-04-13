@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "spree size chart" do
+feature "spree size chart", :js => true do
   stub_authorization!
 
   before do
@@ -28,8 +28,9 @@ feature "spree size chart" do
     visit spree.edit_admin_product_path(@product)
     click_link "Size Chart"
     select "Size", :from => "Option Type"
-    check "Chest"
-    check "Sleeves"
+    select2 'Chest', :from => 'Size Types'
+    select2 'Sleeves', :from => 'Size Types'
+
     click_button "Create"
 
     fill_size_chart
@@ -44,15 +45,17 @@ feature "spree size chart" do
     visit spree.edit_admin_product_path(@product)
     click_link "Size Chart"
     select "Size", :from => "Option Type"
-    check "Chest"
-    check "Sleeves"
+
+    select2 'Chest', :from => 'Size Types'
+    select2 'Sleeves', :from => 'Size Types'
+
     click_button "Create"
 
     fill_size_chart
     click_button "Create"
 
     fill_in "size_chart_size_values_attributes_0_value", :with => 52
-    uncheck "Sleeves"
+    unselect2 "Sleeves", :from => 'Size Types'
 
     click_button "Create"
 
@@ -70,36 +73,71 @@ feature "spree size chart" do
 
   scenario "chart can have a prototype" do
     visit spree.new_admin_prototype_path
-    fill_in "Name", :with => "TSHIRT"
-    click_button "Create"
-
-    visit spree.edit_admin_product_path(@product)
-    click_link "Size Chart"
-    select "Size", :from => "Option Type"
-    check "Chest"
-    check "Sleeves"
-    select "TSHIRT", :from => "Prototype"
-    click_button "Create"
-
-    page.should have_content "Size Chart successfully updated"
-  end
-
-  scenario "chart can have a prototype with size_types", :js => true do
-    pending
-    visit spree.new_admin_prototype_path
     fill_in "Name", :with => "Sleeveless Tshirt"
-    check 'Chest'
+    select2 "Chest", :from => "Size Types"
+
     click_button "Create"
 
     visit spree.edit_admin_product_path(@product)
     click_link "Size Chart"
+
     select "Size", :from => "Option Type"
     select "Sleeveless Tshirt", :from => "Prototype"
-    page.should have_checked_field("Chest")
-    page.should have_not_checked_field("Chest")
+    click_button "Create"
+    page.should have_content "Size Chart successfully updated"
+
+    within('#s2id_size_chart_size_type_ids ul.select2-choices') do
+      page.should have_content('Chest')
+      page.should_not have_content('Sleeves')
+    end
+  end
+
+  scenario "chart with prototype can have custom size type" do
+    visit spree.new_admin_prototype_path
+    fill_in "Name", :with => "Sleeveless Tshirt"
+    select2 "Chest", :from => "Size Types"
 
     click_button "Create"
 
+    visit spree.edit_admin_product_path(@product)
+    click_link "Size Chart"
+
+    select "Size", :from => "Option Type"
+    select "Sleeveless Tshirt", :from => "Prototype"
+    click_button "Create"
     page.should have_content "Size Chart successfully updated"
+
+    select2 'Sleeves', :from => 'Size Types'
+    click_button "Create"
+
+    within('#s2id_size_chart_size_type_ids ul.select2-choices') do
+      page.should have_content('Chest')
+      page.should have_content('Sleeves')
+    end
   end
+
+  scenario 'changing prototype should merge size types' do
+    visit spree.new_admin_prototype_path
+    fill_in "Name", :with => "Sleeveless Tshirt"
+    select2 "Chest", :from => "Size Types"
+
+    click_button "Create"
+
+    visit spree.edit_admin_product_path(@product)
+    click_link "Size Chart"
+
+    select "Size", :from => "Option Type"
+    select2 'Sleeves', :from => 'Size Types'
+    click_button "Create"
+    page.should have_content "Size Chart successfully updated"
+
+    select "Sleeveless Tshirt", :from => "Prototype"
+    click_button "Create"
+
+    within('#s2id_size_chart_size_type_ids ul.select2-choices') do
+      page.should have_content('Chest')
+      page.should have_content('Sleeves')
+    end
+  end
+
 end

@@ -12,6 +12,14 @@ module Spree
     accepts_nested_attributes_for :size_values, :allow_destroy => true
     attr_accessible :size_values_attributes, :size_type_ids, :unit, :option_type_id, :prototype_id
 
+    before_save :set_prototype_size_types, :if => 'prototype_id_changed?'
+
+    def set_prototype_size_types
+      if prototype
+        self.size_type_ids = (size_type_ids + prototype.size_type_ids).uniq
+      end
+    end
+
     def size_values_attributes_with_sanity_check=(attributes)
       attributes.each_value do |attrs|
         if attrs['value'].blank?

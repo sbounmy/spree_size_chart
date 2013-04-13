@@ -8,8 +8,11 @@
 <% size_type_ids = @size_chart.size_type_ids  %>
 
 <%= form_for @size_chart, :url => admin_product_size_chart_path(@product), :method => :put do |f| %>
-  <%= f.label :option_type_id, t(:option_type_id) %>
-  <%= f.select :option_type_id, Spree::OptionType.select("id, name").map {|opt| [opt.name, opt.id] }, { :include_blank => true } %>
+
+  <%= f.field_container :option_type_id do %>
+    <%= f.label :option_type_id, t(:option_type_id) %>
+    <%= f.select :option_type_id, Spree::OptionType.select("id, name").map {|opt| [opt.name, opt.id] }, { :include_blank => true } %>
+  <% end %>
 
   <%= f.field_container :prototype_id do %>
     <%= f.label :prototype_id, t(:prototype) %>
@@ -22,12 +25,8 @@
   <% end %>
 
   <%= f.field_container :size_types do %>
-    <% Spree::SizeType.all.each do |type| %>
-      <div class="columns two alpha">
-        <%= label_tag "size_chart_size_type_ids_#{type.id}", type.name %>
-        <%= check_box_tag "size_chart[size_type_ids][]", type.id, size_type_ids.include?(type.id), :id => "size_chart_size_type_ids_#{type.id}" %>
-      </div>
-    <% end %>
+    <%= f.label :size_type_ids, t(:size_types) %>
+    <%= f.collection_select :size_type_ids, Spree::SizeType.order('name ASC').all, :id, :name, {}, :multiple => true, :class => 'select2 fullwidth' %>
   <% end %>
 
 
