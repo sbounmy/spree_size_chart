@@ -1,9 +1,9 @@
 class MoveSizePrototypeToSpreePrototypes < ActiveRecord::Migration
-  def up
-    class SizePrototype < ActiveRecord::Base
-      has_one :image, :as => :viewable
-    end
+  class Spree::SizePrototype < ActiveRecord::Base
+    has_one :image, :as => :viewable
+  end
 
+  def up
     prototypes = {}
     # For each size prototype create its corresponding Spree::Prototype by prefixing name 'SizeChart : %{name}'
     Spree::SizePrototype.all.each do |prototype|
