@@ -11,7 +11,7 @@
 
   <%= f.field_container :option_type_id do %>
     <%= f.label :option_type_id, t(:option_type_id) %>
-    <%= f.select :option_type_id, Spree::OptionType.select("id, name").map {|opt| [opt.name, opt.id] }, { :include_blank => true } %>
+    <%= f.collection_select :option_type_id, Spree::OptionType.all, :id, :name, :selected => @size_chart.default_or_selected_option_type.try(:id)  %>
   <% end %>
 
   <%= f.field_container :prototype_id do %>
@@ -21,7 +21,7 @@
 
   <%= f.field_container :unit do %>
     <%= f.label :unit %>
-    <%= f.select :unit, Spree::SizeChart::UNITS, :include_blank => true %>
+    <%= f.select :unit, Spree::SizeChart::UNITS, :selected => @size_chart.default_or_selected_unit, :include_blank => true %>
   <% end %>
 
   <%= f.field_container :size_types do %>

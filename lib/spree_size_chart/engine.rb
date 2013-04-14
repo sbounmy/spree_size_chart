@@ -1,4 +1,8 @@
 module SpreeSizeChart
+  mattr_accessor :default_option_type_name, :default_unit
+  @@default_option_type_name = 'size'
+  @@default_unit = 'cm'
+
   class Engine < Rails::Engine
     engine_name 'spree_size_chart'
 

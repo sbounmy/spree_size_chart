@@ -140,4 +140,14 @@ feature "spree size chart", :js => true do
     end
   end
 
+  scenario 'default option type name' do
+    SpreeSizeChart.default_option_type_name = 'color'
+    @color = FactoryGirl.create(:option_type, :name => "color", :presentation => 'Color')
+
+    visit spree.edit_admin_product_path(@product)
+    click_link "Size Chart"
+    page.should have_content('Edit')
+    find_field('size_chart_option_type_id').value.to_i.should == @color.id
+    SpreeSizeChart.default_option_type_name = 'size'
+  end
 end

@@ -76,6 +76,16 @@ module Spree
     def option_type_with_unit
       "#{option_type.try(:presentation)} (#{unit})"
     end
+
+    def default_or_selected_option_type
+      option_type || Spree::OptionType.where(["lower(name) = ?", default_option_type_name.downcase]).first
+    end
+
+    def default_or_selected_unit
+      unit || default_unit
+    end
+
+    delegate :default_option_type_name, :default_unit, :to => SpreeSizeChart
   end
 
 end
