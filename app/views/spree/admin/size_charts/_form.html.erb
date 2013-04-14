@@ -1,3 +1,5 @@
+<% product_option_value_ids = form.object.product.variants.map(&:option_value_ids).flatten %>
+
 <%= form.field_container :name do %>
   <table>
     <% unless form.object.new_record? %>
@@ -12,8 +14,9 @@
         <% @tabindex = 1 %>
         <%= form.fields_for :size_values, form.object.find_or_initialize_size_values do |value_form| %>
         <% if @i == 0 %>
-          <%= "<tr>".html_safe  %>
-          <th><%= form.object.option_values.find(value_form.object.option_value_id).name %></th>
+          <% ov = form.object.option_values.find(value_form.object.option_value_id) %>
+          <tr class='<%= 'even' if product_option_value_ids.include?(ov.id) %>'>
+          <th><%= ov.name %></th>
         <% end %>
         <td>
           <%= value_form.hidden_field :size_type_id %>
