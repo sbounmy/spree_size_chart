@@ -1,6 +1,8 @@
-<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
 
-<h1><%= t(:new_size_type) %></h1>
+<% content_for :page_title do %>
+  <%= t(:edit_size_type) %>
+<% end %>
 
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @size_type } %>
 

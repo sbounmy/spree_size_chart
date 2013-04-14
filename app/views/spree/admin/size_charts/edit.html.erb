@@ -2,8 +2,6 @@
 
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => { :current => 'Size Chart' } %>
 
-<h1><%= t(:edit_size_chart) %></h1>
-
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @size_chart } %>
 <% size_type_ids = @size_chart.size_type_ids  %>
 
