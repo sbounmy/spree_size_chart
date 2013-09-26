@@ -31,5 +31,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'awesome_print'
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'selenium-webdriver'
+  s.add_development_dependency 'selenium-webdriver', '2.35.1'
 end
