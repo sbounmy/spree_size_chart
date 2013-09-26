@@ -2,11 +2,15 @@ module Spree
   class SizeChart < ActiveRecord::Base
     UNITS = ['cm', 'inch']
 
+    # Size
     belongs_to  :option_type, :class_name => "Spree::OptionType"
     belongs_to  :product
     belongs_to  :prototype
+    # S, M, L...
     has_many    :option_values, :through => :option_type
+    # Chest, sleeves, shoulder....
     has_and_belongs_to_many :size_types, :class_name => "Spree::SizeType", :join_table => "spree_size_charts_size_types"
+    # 100, 65, 42 (Chest, sleeves, shoulder values)
     has_many    :size_values, :class_name => "Spree::SizeValue"
 
     accepts_nested_attributes_for :size_values, :allow_destroy => true
