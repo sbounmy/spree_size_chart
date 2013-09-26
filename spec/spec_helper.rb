@@ -10,13 +10,13 @@ require 'rspec/rails'
 Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each {|f| require f }
 
 # Requires factories defined in spree_core
-require 'spree/core/testing_support/factories'
-require 'spree/core/testing_support/authorization_helpers'
-require 'spree/core/testing_support/capybara_ext'
+require 'spree/testing_support/factories'
+require 'spree/testing_support/authorization_helpers'
+require 'spree/testing_support/capybara_ext'
 
 require 'factories'
 require 'ffaker'
-
+require 'debugger'
 RSpec.configure do |config|
   # == Mock Framework
   #
@@ -36,6 +36,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.include Capybara::DSL
   config.include Spree::UrlHelpers
+  config.include FactoryGirl::Syntax::Methods
 end
 
 # monekypatch helper
@@ -53,11 +54,9 @@ CapybaraExt.module_eval do
   end
 
   def unselect2(value, options)
-    id = find_label_by_text(options[:from])
+    label = find_label_by_text(options[:from])
 
-    # generate select2 id
-    options[:from] = "#s2id_#{id}"
-    within "#{options[:from]} ul.select2-choices" do
+    within label.first(:xpath,".//..") do
       element = find(:xpath, "//li[@class='select2-search-choice' and contains(., '#{value}')]")
       element.find('a.select2-search-choice-close').click
       # wait for close to be effective

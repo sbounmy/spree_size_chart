@@ -4,13 +4,13 @@ feature "spree size chart", :js => true do
   stub_authorization!
 
   before do
-    @option_type = FactoryGirl.create(:option_type, :name => "Size")
-    @option_value1 = FactoryGirl.create(:option_value, :name => "M", :option_type => @option_type)
-    @option_value2 = FactoryGirl.create(:option_value, :name => "L", :option_type => @option_type)
-    @option_value3 = FactoryGirl.create(:option_value, :name => "XL", :option_type => @option_type)
-    @size_type1 = FactoryGirl.create(:size_type, :name => "Chest")
-    @size_type2 = FactoryGirl.create(:size_type, :name => "Sleeves")
-    @product = FactoryGirl.create(:product)
+    @option_type = create(:option_type, :name => "Size")
+    @option_value1 = create(:option_value, :name => "M", :option_type => @option_type)
+    @option_value2 = create(:option_value, :name => "L", :option_type => @option_type)
+    @option_value3 = create(:option_value, :name => "XL", :option_type => @option_type)
+    @size_type1 = create(:size_type, :name => "Chest")
+    @size_type2 = create(:size_type, :name => "Sleeves")
+    @product = create(:product)
   end
 
   def fill_size_chart
@@ -142,7 +142,7 @@ feature "spree size chart", :js => true do
 
   scenario 'default option type name' do
     SpreeSizeChart.default_option_type_name = 'color'
-    @color = FactoryGirl.create(:option_type, :name => "color", :presentation => 'Color')
+    @color = create(:option_type, :name => "color", :presentation => 'Color')
 
     visit spree.edit_admin_product_path(@product)
     click_link "Size Chart"
